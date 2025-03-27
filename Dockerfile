@@ -13,7 +13,8 @@ RUN ssh-keygen -A
 RUN echo "Port 22" >> /etc/ssh/sshd_config && \
     echo "ListenAddress 0.0.0.0" >> /etc/ssh/sshd_config && \
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
-    echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+    echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config && \
+    echo "AllowTcpForwarding yes" >> /etc/ssh/sshd_config
 
 # 创建运行时目录并设置权限
 RUN mkdir -p /var/run/sshd && chmod 0755 /var/run/sshd
