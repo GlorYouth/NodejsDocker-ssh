@@ -10,9 +10,13 @@ RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh
 RUN ssh-keygen -A
 
 # 配置 SSH 服务
-RUN echo "Include /etc/ssh/sshd_config.d/*.conf" > /etc/ssh/sshd_config && \
+RUN rm /etc/ssh/sshd_config
+
+RUN touch /etc/ssh/sshd_config
+
+RUN echo "Include /etc/ssh/sshd_config.d/*.conf" >> /etc/ssh/sshd_config && \
     echo "AuthorizedKeysFile .ssh/authorized_keys" >> /etc/ssh/sshd_config && \
-    echo "Subsystem	sftpinternal-sftp" >> /etc/ssh/sshd_config && \
+    echo "Subsystem sftp internal-sftp" >> /etc/ssh/sshd_config && \
     echo "Port 22" >> /etc/ssh/sshd_config && \
     echo "ListenAddress 0.0.0.0" >> /etc/ssh/sshd_config && \
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
